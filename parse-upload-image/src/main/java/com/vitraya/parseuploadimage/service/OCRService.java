@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import javax.swing.text.AttributeSet;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -45,6 +46,22 @@ public class OCRService {
         String extractedText = "";
         try {
             extractedText =  tesseract.doOCR(tempImageFile);
+            /*
+            Font boldFont = new Font(Font.SANS_SERIF, Font.BOLD, 12);
+            Font regularFont = new Font(Font.SANS_SERIF, Font.PLAIN, 12);
+
+            for (String line : result.split("\\n")) {
+                FontMetrics metrics = new Canvas().getFontMetrics(boldFont);
+                int boldWidth = metrics.stringWidth(line);
+
+                metrics = new Canvas().getFontMetrics(regularFont);
+                int regularWidth = metrics.stringWidth(line);
+
+                if (boldWidth > regularWidth) {
+                    log.info("bold encountered : {}", line);
+                }
+            }
+             */
         } catch (TesseractException ex) {
             log.error("Error occurred while extracting the text {}", ex.getMessage());
             throw new RuntimeException("Error extracting text from image.");
@@ -61,7 +78,22 @@ public class OCRService {
 
     public String extractBoldWords(String text) {
         List<String> boldWords = new ArrayList<>();
+/*
+            Font boldFont = new Font(Font.SANS_SERIF, Font.BOLD, 12);
+            Font regularFont = new Font(Font.SANS_SERIF, Font.PLAIN, 12);
 
+            for (String line : text.split("\\n")) {
+                FontMetrics metrics = new Canvas().getFontMetrics(boldFont);
+                int boldWidth = metrics.stringWidth(line);
+
+                metrics = new Canvas().getFontMetrics(regularFont);
+                int regularWidth = metrics.stringWidth(line);
+
+                if (boldWidth > regularWidth) {
+                    log.info("bold encountered : {}", line);
+                }
+            }
+ */
         Pattern pattern = Pattern.compile("\\*\\*(.*?)\\*\\*");
         Matcher matcher = pattern.matcher(text);
 

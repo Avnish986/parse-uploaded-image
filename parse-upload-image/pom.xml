@@ -49,6 +49,12 @@
 			<version>1.18.30</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.google.cloud/google-cloud-vision -->
+		<dependency>
+			<groupId>com.google.cloud</groupId>
+			<artifactId>google-cloud-vision</artifactId>
+			<version>3.33.0</version>
+		</dependency>
 
 
 	</dependencies>
